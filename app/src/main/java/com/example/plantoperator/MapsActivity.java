@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap mMaps;
 
     //Declaration of global variables to contain latitude and longitude
     Double lat = null;
@@ -50,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        mMaps = googleMap;
         UiSettings uiSettings = googleMap.getUiSettings();
         uiSettings.setZoomControlsEnabled(true);
 
@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             return;
                         }
 
-                        mMap.clear();
+                        mMaps.clear();
 
 /**************************************Fetch Documents in an ArrayList*****************************************************************/
 
@@ -85,8 +85,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String var_vehicle_number = String.valueOf(user.get("vehicle_number"));
                             //Mark Location
                             LatLng location = new LatLng(lat,lng);
-                            mMap.addMarker(new MarkerOptions().position(location).title(var_vehicle_number));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                            mMaps.addMarker(new MarkerOptions().position(location).title(var_vehicle_number));
+                            mMaps.moveCamera(CameraUpdateFactory.newLatLng(location));
 
                         }
 
