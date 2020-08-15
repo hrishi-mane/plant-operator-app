@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,20 +23,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import androidx.appcompat.view.ActionMode.Callback;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AdminActivity extends AppCompatActivity implements UserDetailsDialogFragment.DialogToRecycler, Callback{
-    FloatingActionButton fab;
+    FloatingActionButton add_users;
     Toolbar mToolBar;
     RecyclerView users;
 
     List<UserDetails> arrayList = new ArrayList<>();
 
-    UserListAdapter userListAdapter,userListAdapter2;
+    UserListAdapter userListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +67,19 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
         });
 
 
-        fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        add_users = findViewById(R.id.add_users_button);
+        add_users.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialog();
 
+            }
+        });
+
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 

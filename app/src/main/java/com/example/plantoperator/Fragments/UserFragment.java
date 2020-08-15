@@ -1,5 +1,6 @@
 package com.example.plantoperator.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,15 +8,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.plantoperator.R;
+import com.example.plantoperator.SelectUserForSessionActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class UserFragment extends Fragment {
 
-    FloatingActionButton fab;
+    FloatingActionButton add_user_to_session;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -56,7 +59,18 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        add_user_to_session = view.findViewById(R.id.add_user_to_session_button);
+
+        add_user_to_session.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SelectUserForSessionActivity.class);
+                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), (View)add_user_to_session, "shared_element_trans");
+                startActivity(intent, option.toBundle());
+            }
+        });
 
     }
+
 
 }

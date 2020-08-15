@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containers"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="shared_element_trans"
+    tools:context=".SelectUserForSessionActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/session_tool_bar"
+        style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_close_24"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/available_user_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/session_tool_bar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
