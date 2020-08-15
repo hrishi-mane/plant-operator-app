@@ -34,15 +34,18 @@ public class UserDetailsDialogFragment extends DialogFragment{
     String recycler_name = "", recycler_phone = "";
 
     Integer adapterPosition = null;
+    String string_for_editext_city,string_for_edittext_address;
 
 
     public UserDetailsDialogFragment() {
     }
 
-    public UserDetailsDialogFragment(String recycler_name, String recycler_phone,Integer adapterPosition) {
+    public UserDetailsDialogFragment(String recycler_name, String recycler_phone,String city, String address,Integer adapterPosition) {
         this.recycler_name = recycler_name;
         this.recycler_phone = recycler_phone;
         this.adapterPosition = adapterPosition;
+        this.string_for_editext_city = city;
+        this.string_for_edittext_address = address;
     }
 
     @NonNull
@@ -62,6 +65,8 @@ public class UserDetailsDialogFragment extends DialogFragment{
         if(!(recycler_name.isEmpty() && recycler_phone.isEmpty())){
             name.setText(recycler_name);
             phone.setText(recycler_phone);
+            city.setText(string_for_editext_city);
+            address.setText(string_for_edittext_address);
         }
 
         builder.setView(view)
@@ -76,11 +81,13 @@ public class UserDetailsDialogFragment extends DialogFragment{
 
                         if(!(recycler_name.isEmpty() && recycler_phone.isEmpty())){
                             updateUserToFireStore(userDetails);
+                            dialogToRecycler.passEditData(userDetails,adapterPosition);
 
 
                         }
                         else {
                             addUserToFirestore(userDetails);
+                            dialogToRecycler.passData(userDetails);
                         }
 
 
@@ -132,6 +139,8 @@ public class UserDetailsDialogFragment extends DialogFragment{
 
     public interface DialogToRecycler{
         void passData(UserDetails userDetails);
+
+        void passEditData(UserDetails userDetails, Integer adapterPosition);
 
 
     }

@@ -38,7 +38,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     ActionMode actionMode;
 
 
-
     private boolean multiSelect = false;
     private List<UserDetails> selectedItems = new ArrayList<>();
 
@@ -97,7 +96,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     };
 
 
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -117,11 +115,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         holder.update(arrayListUserDetails.get(position));
 
 
-
-
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
         TextView name, phone_no;
 
         RelativeLayout relativeLayout;
@@ -131,7 +127,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         View itemView;
 
         Context mContext;
-
 
 
         public MyViewHolder(View itemView) {
@@ -166,8 +161,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         public boolean onMenuItemClick(MenuItem menuItem) {
             String nameToDialog = name.getText().toString();
             String phoneToDialog = phone_no.getText().toString();
+            String cityToDialog = arrayListUserDetails.get(getAdapterPosition()).getCity();
+            String addressToDialog = arrayListUserDetails.get(getAdapterPosition()).getAddress();
 
-            UserDetailsDialogFragment userDetailsDialogFragment2 = new UserDetailsDialogFragment(nameToDialog, phoneToDialog,getAdapterPosition());
+            UserDetailsDialogFragment userDetailsDialogFragment2 = new UserDetailsDialogFragment(nameToDialog, phoneToDialog,cityToDialog,addressToDialog,getAdapterPosition());
             userDetailsDialogFragment2.show(((AppCompatActivity) mContext).getSupportFragmentManager(), "myDialog");
 
             return true;
@@ -254,7 +251,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
         }
     };
-
 
 
 }

@@ -116,10 +116,15 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
         arrayList.add(userDetails);
         userListAdapter = new UserListAdapter(arrayList);
         users.setAdapter(userListAdapter);
-
+        userListAdapter.notifyDataSetChanged();
 
     }
 
+    @Override
+    public void passEditData(UserDetails userDetails, Integer adapterPosition) {
+        arrayList.set(adapterPosition, userDetails);
+        userListAdapter.notifyItemChanged(adapterPosition);
+    }
 
 
     @Override
