@@ -66,7 +66,7 @@ public class UserFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SelectUserForSessionActivity.class);
                 ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), (View)add_user_to_session, "shared_element_trans");
-                startActivity(intent, option.toBundle());
+                startActivity(intent,option.toBundle());
             }
         });
 
