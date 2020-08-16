@@ -4,36 +4,31 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
-import com.example.plantoperator.Adapters.AvailableUserListAdapter;
-import com.example.plantoperator.POJO.UserDetails;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.plantoperator.Fragments.SelectDestination;
+import com.example.plantoperator.Fragments.SelectUsers;
 import com.google.android.material.transition.platform.MaterialArcMotion;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectUserForSessionActivity extends AppCompatActivity {
-    Toolbar session_tool_bar;
-
-    List<UserDetails>  list_available_users = new ArrayList<>();
-
-    RecyclerView available_user_list;
-
-    AvailableUserListAdapter available_user_list_adapter;
+    Toolbar select_user_sesssion_toolbar;
+    ViewPager user_and_location;
+    Fragment selectUser,selectDestination;
+    ImageButton next_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,87 +41,29 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         getWindow().setSharedElementReenterTransition(buildTransition());
         super.onCreate(savedInstanceState);
 
-        session_tool_bar = findViewById(R.id.session_tool_bar);
+        select_user_sesssion_toolbar = findViewById(R.id.session_tool_bar);
+        user_and_location = findViewById(R.id.user_location_viewpager);
+        selectUser = new SelectUsers();
+        selectDestination = new SelectDestination();
 
-        available_user_list = findViewById(R.id.available_user_list_recycler);
-        available_user_list.setLayoutManager(new LinearLayoutManager(this));
+        ViewPagerAdapter user_and_location_adapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
+        user_and_location_adapter.addFragment(selectUser);
+        user_and_location_adapter.addFragment(selectDestination);
+        user_and_location.setAdapter(user_and_location_adapter);
 
-        setSupportActionBar(session_tool_bar);
-        getSupportActionBar().setTitle("Select Users");
+        setSupportActionBar(select_user_sesssion_toolbar);
+        getSupportActionBar().setTitle("Add Users to Session");
 
-        session_tool_bar.setNavigationOnClickListener(new View.OnClickListener() {
+        select_user_sesssion_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
 
-        FirebaseFirestore.getInstance().collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot documentSnapshot:task.getResult()){
-                        UserDetails userDetails = documentSnapshot.toObject(UserDetails.class);
-                        list_available_users.add(userDetails);
-                    }
-                }
-                available_user_list_adapter = new AvailableUserListAdapter(list_available_users);
-
-                available_user_list.setAdapter(available_user_list_adapter);
-            }
-        });
-
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private MaterialContainerTransform buildTransition(){
         com.google.android.material.transition.platform.MaterialContainerTransform materialContainerTransform = new com.google.android.material.transition.platform.MaterialContainerTransform();
@@ -134,9 +71,33 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         materialContainerTransform.setAllContainerColors(Color.parseColor("#ffffff"));
         materialContainerTransform.setDuration(500);
         materialContainerTransform.setPathMotion(new MaterialArcMotion());
-        materialContainerTransform.setInterpolator(new FastOutLinearInInterpolator());
-        materialContainerTransform.setFadeMode(MaterialContainerTransform.FADE_MODE_CROSS);
+        materialContainerTransform.setInterpolator(new FastOutLinearInInterpolator());;
         return materialContainerTransform;
 
     }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+        List<Fragment> fragmentList = new ArrayList<>();
+
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        private void addFragment(Fragment fragment){
+            fragmentList.add(fragment);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+    }
+
+
 }
