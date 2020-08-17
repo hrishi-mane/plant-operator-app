@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.plantoperator.Fragments.SelectDestination;
@@ -43,7 +43,7 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         setEnterSharedElementCallback(new MaterialContainerTransformSharedElementCallback());
 
         getWindow().setSharedElementEnterTransition(buildTransition());
-        getWindow().setSharedElementExitTransition(buildTransition());
+        getWindow().setSharedElementReturnTransition(buildTransition());
         getWindow().setSharedElementReenterTransition(buildTransition());
 
         super.onCreate(savedInstanceState);
@@ -101,19 +101,17 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
 
     }
 
-
-
     private MaterialContainerTransform buildTransition(){
         com.google.android.material.transition.platform.MaterialContainerTransform materialContainerTransform = new com.google.android.material.transition.platform.MaterialContainerTransform();
-        materialContainerTransform.addTarget(R.id.user_location_viewpager);
+        materialContainerTransform.addTarget(R.id.containers);
         materialContainerTransform.setAllContainerColors(Color.parseColor("#ffffff"));
-        materialContainerTransform.setDuration(500);
+        materialContainerTransform.setDuration(400);
         materialContainerTransform.setPathMotion(new MaterialArcMotion());
-        materialContainerTransform.setInterpolator(new FastOutLinearInInterpolator());
-        materialContainerTransform.setFadeMode(MaterialContainerTransform.FADE_MODE_CROSS);
+        materialContainerTransform.setInterpolator(new FastOutSlowInInterpolator());
         return materialContainerTransform;
 
     }
+
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
         List<Fragment> fragmentList = new ArrayList<>();

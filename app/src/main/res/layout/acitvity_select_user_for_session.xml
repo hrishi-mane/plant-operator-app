@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/containers"
     android:layout_width="match_parent"
-
+    android:transitionName="shared_element_trans"
     android:layout_height="match_parent"
     tools:context=".SelectUserForSessionActivity">
 
@@ -32,7 +32,7 @@
         android:id="@+id/user_location_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:transitionName="shared_element_trans"
+
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
