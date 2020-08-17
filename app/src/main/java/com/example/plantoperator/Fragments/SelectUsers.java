@@ -8,11 +8,27 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.plantoperator.Adapters.AvailableUserListAdapter;
+import com.example.plantoperator.POJO.UserDetails;
 import com.example.plantoperator.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SelectUsers extends Fragment {
+
+    RecyclerView available_user_list;
+    AvailableUserListAdapter available_user_list_adapter;
+    List<UserDetails> list_available_users = new ArrayList<>();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -54,6 +70,25 @@ public class SelectUsers extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        available_user_list = view.findViewById(R.id.available_user_list);
+        available_user_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseFirestore.getInstance().collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot:task.getResult()){
+                        UserDetails userDetails = documentSnapshot.toObject(UserDetails.class);
+                        list_available_users.add(userDetails);
+                    }
+                }
+                available_user_list_adapter = new AvailableUserListAdapter(list_available_users);
+
+                available_user_list.setAdapter(available_user_list_adapter);
+            }
+        });
 
     }
 }

@@ -1,8 +1,11 @@
 package com.example.plantoperator.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.plantoperator.POJO.UserDetails;
 import com.example.plantoperator.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUserListAdapter.AvailableUserListViewHolder> {
+public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUserListAdapter.AvailableUserListViewHolder>{
     List<UserDetails> list_available_users;
+    List<String> selected_list_available_users = new ArrayList<>();
 
     public AvailableUserListAdapter(List<UserDetails> list_available_users) {
         this.list_available_users = list_available_users;
@@ -41,13 +46,34 @@ public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUser
         return list_available_users.size();
     }
 
+
+
     public class AvailableUserListViewHolder extends RecyclerView.ViewHolder{
         TextView available_list_name_element;
         View itemView;
+        CheckBox select_user;
         public AvailableUserListViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
             available_list_name_element = itemView.findViewById(R.id.available_list_name_element);
+
+            select_user = itemView.findViewById(R.id.select_user_checkbox);
+
+            select_user.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isClicked) {
+                    if(isClicked){
+
+                        selected_list_available_users.add(available_list_name_element.getText().toString());
+                        Log.d("CheckBox", "onCheckedChanged: clicked" + selected_list_available_users);
+                    }
+                    else{
+                        selected_list_available_users.remove(available_list_name_element.getText().toString());
+                        Log.d("CheckBox", "onCheckedChanged: unclicked" + selected_list_available_users);
+                    }
+                }
+            });
         }
+
     }
 }

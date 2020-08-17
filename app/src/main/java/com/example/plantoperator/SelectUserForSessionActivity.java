@@ -59,7 +59,7 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         user_and_location.setAdapter(user_and_location_adapter);
 
         setSupportActionBar(select_user_sesssion_toolbar);
-        getSupportActionBar().setTitle("Add Users to Session");
+        getSupportActionBar().setTitle("Select Users");
 
         select_user_sesssion_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getSupportActionBar().setTitle("Select Destination");
                 user_and_location.setCurrentItem(2, true);
                 next_button.setVisibility(View.INVISIBLE);
                 prev_button.setVisibility(View.VISIBLE);
@@ -87,6 +87,7 @@ public class SelectUserForSessionActivity extends AppCompatActivity {
         prev_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getSupportActionBar().setTitle("Select Users");
                 user_and_location.setCurrentItem(0,true);
                 prev_button.setVisibility(View.INVISIBLE);
                 next_button.setVisibility(View.VISIBLE);
