@@ -71,13 +71,13 @@ public class SelectDestination extends Fragment {
         available_destination_list = view.findViewById(R.id.available_destination_list);
         available_destination_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FirebaseFirestore.getInstance().collection("Plants").document("101").
+        FirebaseFirestore.getInstance().
                 collection("Customers").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(DocumentSnapshot documentSnapshot:task.getResult()){
-                        list_available_destination.add(documentSnapshot.get("location").toString());
+                        list_available_destination.add(documentSnapshot.get("location_name").toString());
                     }
                 }
                 available_destination_list_adapter = new AvailableDestinationAdapter(list_available_destination);

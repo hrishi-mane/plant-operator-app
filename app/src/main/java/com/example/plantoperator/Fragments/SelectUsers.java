@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SelectUsers extends Fragment {
+public class SelectUsers extends Fragment{
 
     RecyclerView available_user_list;
     AvailableUserListAdapter available_user_list_adapter;
@@ -81,13 +81,21 @@ public class SelectUsers extends Fragment {
                     for(DocumentSnapshot documentSnapshot:task.getResult()){
                         UserDetails userDetails = documentSnapshot.toObject(UserDetails.class);
                         list_available_users.add(userDetails);
-                    }
-                }
-                available_user_list_adapter = new AvailableUserListAdapter(list_available_users);
 
-                available_user_list.setAdapter(available_user_list_adapter);
+                    }
+                    available_user_list_adapter = new AvailableUserListAdapter(list_available_users);
+
+                    available_user_list.setAdapter(available_user_list_adapter);
+                }
+
+
             }
         });
 
     }
+
+
+
+
+
 }

@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_anchorGravity="center"
+        app:menu="@menu/select_user_for_session_toolbar_menu"
         app:navigationIcon="@drawable/ic_baseline_close_24" />
 
     </com.google.android.material.appbar.AppBarLayout>

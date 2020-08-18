@@ -13,22 +13,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantoperator.POJO.UserDetails;
 import com.example.plantoperator.R;
+import com.example.plantoperator.SelectUserForSessionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUserListAdapter.AvailableUserListViewHolder>{
     List<UserDetails> list_available_users;
-    List<String> selected_list_available_users = new ArrayList<>();
+    ArrayList<String> selected_list_available_users = new ArrayList<>();
+    AvailableUserListAdapterToSelectUser availableUserListAdapterToSelectUser;
+
+
+    public AvailableUserListAdapter() {
+
+    }
 
     public AvailableUserListAdapter(List<UserDetails> list_available_users) {
         this.list_available_users = list_available_users;
+        availableUserListAdapterToSelectUser = new SelectUserForSessionActivity();
     }
+
 
     @NonNull
     @Override
     public AvailableUserListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.available_user_list_adapter, parent, false);
 
@@ -48,6 +56,10 @@ public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUser
 
 
 
+    public interface AvailableUserListAdapterToSelectUser{
+        void sendData(List<String> selected_list_available_users);
+    }
+
     public class AvailableUserListViewHolder extends RecyclerView.ViewHolder{
         TextView available_list_name_element;
         View itemView;
@@ -63,8 +75,9 @@ public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUser
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isClicked) {
                     if(isClicked){
-
                         selected_list_available_users.add(available_list_name_element.getText().toString());
+                        availableUserListAdapterToSelectUser.sendData(selected_list_available_users);
+
                         Log.d("CheckBox", "onCheckedChanged: clicked" + selected_list_available_users);
                     }
                     else{
@@ -76,4 +89,6 @@ public class AvailableUserListAdapter extends RecyclerView.Adapter<AvailableUser
         }
 
     }
+
+
 }
