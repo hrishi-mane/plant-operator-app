@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:transitionName="shared_element_trans"
     android:layout_height="match_parent"
-    tools:context=".SelectUserForSessionActivity">
+    tools:context=".SelectUserForCycleActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout

@@ -1,5 +1,10 @@
 package com.example.plantoperator;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import com.example.plantoperator.Dialogs.DeleteCycleConfirmationFragment;
 import com.example.plantoperator.Fragments.MapFragment;
 import com.example.plantoperator.Fragments.UserFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -93,10 +94,19 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.item_about){
+        if(item.getItemId() == R.id.admin_page_option){
             Intent intent = new Intent(HomeActivity.this, AdminActivity.class);
             startActivity(intent);
         }
+
+        if(item.getItemId() == R.id.delete_cycle){
+            showConfirmationDialog();
+        }
         return true;
+    }
+
+    private void showConfirmationDialog() {
+        DeleteCycleConfirmationFragment deleteCycleConfirmationFragment = new DeleteCycleConfirmationFragment();
+        deleteCycleConfirmationFragment.show(getSupportFragmentManager(), "AlertDialog");
     }
 }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantoperator.Adapters.UserListAdapter;
-import com.example.plantoperator.Fragments.UserDetailsDialogFragment;
+import com.example.plantoperator.Dialogs.UserDetailsDialogFragment;
 import com.example.plantoperator.POJO.UserDetails;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -120,8 +120,6 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
     public void passData(UserDetails userDetails) {
 
         arrayList.add(userDetails);
-        userListAdapter = new UserListAdapter(arrayList);
-        users.setAdapter(userListAdapter);
         userListAdapter.notifyDataSetChanged();
 
     }

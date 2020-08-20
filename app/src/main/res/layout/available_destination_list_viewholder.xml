@@ -26,6 +26,8 @@
             android:textSize="18sp"
             android:textStyle="normal" />
 
+
+
         <View
             android:id="@+id/divider"
             android:layout_width="350dp"
@@ -38,7 +40,10 @@
             android:layout_marginTop="86dp"
             android:layout_marginEnd="21dp"
             android:layout_marginRight="21dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"/>
+
+
 
         <ImageView
             android:id="@+id/selected_icon"

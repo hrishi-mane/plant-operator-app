@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantoperator.Adapters.AvailableDestinationAdapter;
 import com.example.plantoperator.R;
+import com.example.plantoperator.SelectUserForCycleActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -80,7 +81,7 @@ public class SelectDestination extends Fragment {
                         list_available_destination.add(documentSnapshot.get("location_name").toString());
                     }
                 }
-                available_destination_list_adapter = new AvailableDestinationAdapter(list_available_destination);
+                available_destination_list_adapter = new AvailableDestinationAdapter(list_available_destination, (SelectUserForCycleActivity)getActivity());
 
                 available_destination_list.setAdapter(available_destination_list_adapter);
             }

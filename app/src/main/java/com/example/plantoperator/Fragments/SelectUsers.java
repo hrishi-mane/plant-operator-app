@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.plantoperator.Adapters.AvailableUserListAdapter;
 import com.example.plantoperator.POJO.UserDetails;
 import com.example.plantoperator.R;
+import com.example.plantoperator.SelectUserForCycleActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -83,7 +84,7 @@ public class SelectUsers extends Fragment{
                         list_available_users.add(userDetails);
 
                     }
-                    available_user_list_adapter = new AvailableUserListAdapter(list_available_users);
+                    available_user_list_adapter = new AvailableUserListAdapter(list_available_users, (SelectUserForCycleActivity) getActivity());
 
                     available_user_list.setAdapter(available_user_list_adapter);
                 }

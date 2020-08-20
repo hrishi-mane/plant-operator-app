@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plantoperator.R;
+import com.example.plantoperator.SelectUserForCycleActivity;
 
 import java.util.List;
 
@@ -18,13 +19,14 @@ public class AvailableDestinationAdapter extends RecyclerView.Adapter<AvailableD
     List<String> list_available_destination;
     Integer selectedItemPos = -1;
     Integer lastItemSelectedPos = -1;
+    AvailableDestinationAdpToSelectUser availableDestinationAdpToSelectUser;
 
 
 
 
-    public AvailableDestinationAdapter(List<String> list_available_destination) {
+    public AvailableDestinationAdapter(List<String> list_available_destination, SelectUserForCycleActivity selectUserForCycleActivity) {
         this.list_available_destination = list_available_destination;
-
+        availableDestinationAdpToSelectUser = selectUserForCycleActivity;
     }
 
     @NonNull
@@ -52,6 +54,10 @@ public class AvailableDestinationAdapter extends RecyclerView.Adapter<AvailableD
         return list_available_destination.size();
     }
 
+    public interface AvailableDestinationAdpToSelectUser{
+        void sendAvailableDestnData(String destination);
+    }
+
     public class AvailableDestinationViewHolder extends RecyclerView.ViewHolder{
 
         TextView available_list_destination_element;
@@ -69,6 +75,7 @@ public class AvailableDestinationAdapter extends RecyclerView.Adapter<AvailableD
                 @Override
                 public void onClick(View view) {
                     destination = available_list_destination_element.getText().toString();
+                    availableDestinationAdpToSelectUser.sendAvailableDestnData(destination);
 
                     selectedItemPos = getAdapterPosition();
                     if(lastItemSelectedPos == -1){

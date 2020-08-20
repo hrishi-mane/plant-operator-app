@@ -1,7 +1,6 @@
 package com.example.plantoperator.POJO;
 
 public class UserDetails {
-
     public String name;
     public String phone_number;
     public String city;

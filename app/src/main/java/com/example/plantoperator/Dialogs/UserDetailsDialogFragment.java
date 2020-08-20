@@ -1,4 +1,4 @@
-package com.example.plantoperator.Fragments;
+package com.example.plantoperator.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;

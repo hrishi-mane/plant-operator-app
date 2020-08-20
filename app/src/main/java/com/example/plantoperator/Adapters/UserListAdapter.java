@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.Fragments.UserDetailsDialogFragment;
+import com.example.plantoperator.Dialogs.UserDetailsDialogFragment;
 import com.example.plantoperator.POJO.UserDetails;
 import com.example.plantoperator.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -100,7 +100,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user_list, parent, false);
+                .inflate(R.layout.user_list_viewholder, parent, false);
 
         MyViewHolder vh = new MyViewHolder(view);
         return vh;
