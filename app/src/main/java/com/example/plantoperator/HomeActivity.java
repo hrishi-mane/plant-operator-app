@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.plantoperator.Dialogs.DeleteCycleConfirmationFragment;
-import com.example.plantoperator.Fragments.MapFragment;
 import com.example.plantoperator.Fragments.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -50,14 +49,16 @@ public class HomeActivity extends AppCompatActivity {
 
         mTabLayout.setupWithViewPager(mViewPager);
 
+        mMapFragment = new ReceiverFragment();
         mUserFragment = new UserFragment();
-        mMapFragment = new MapFragment();
+
 
         ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         mViewPagerAdapter.addFragment(mMapFragment, "MAP");
         mViewPagerAdapter.addFragment(mUserFragment, "Truck Operators");
         mViewPager.setAdapter(mViewPagerAdapter);
     }
+
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
 
