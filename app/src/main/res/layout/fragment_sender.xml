@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:padding="24dp"
-            android:text="Users List"
+            android:text="Truck Operators"
             android:textColor="@android:color/white" />
 
         <ImageView

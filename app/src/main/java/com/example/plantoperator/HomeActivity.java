@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.plantoperator.Dialogs.DeleteCycleConfirmationFragment;
+import com.example.plantoperator.Fragments.ReceiverFragment;
 import com.example.plantoperator.Fragments.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,19 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
 
     Toolbar mToolBar;
     ViewPager mViewPager;
     TabLayout mTabLayout;
     Fragment mUserFragment,mMapFragment;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.tool_bar_menu,menu);
-        return true;
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +87,13 @@ public class HomeActivity extends AppCompatActivity {
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.tool_bar_menu,menu);
+        return true;
     }
 
     @Override
