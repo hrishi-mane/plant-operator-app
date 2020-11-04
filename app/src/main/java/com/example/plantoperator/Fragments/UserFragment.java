@@ -100,18 +100,18 @@ public class UserFragment extends Fragment {
         });
     }
 
-    public void checkIfFirestoreUpdated () {
+    public void checkIfFirestoreUpdated() {
         FirebaseFirestore.getInstance().collection("Session").document("session123")
                 .collection("Users").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-
+            public void onEvent(@Nullable QuerySnapshot value, FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.d("onEvent ", "Listen Failed: " + error);
+                }
                 if (value.size() == 0) {
                     cycleNotExists();
 
-                }
-                else {
+                } else {
                     for (DocumentSnapshot documentSnapshot : value) {
                         addUserToCycle(documentSnapshot);
                     }
@@ -121,7 +121,7 @@ public class UserFragment extends Fragment {
     }
 
     private void addUserToCycle(DocumentSnapshot documentSnapshot) {
-
+        Log.d("addUserToCycleCalled:", "called");
         SessionUserCustomerDetails fetched_user = documentSnapshot.toObject(SessionUserCustomerDetails.class);
 
         if (session_user_customer_details_list.size() == 0) {
@@ -146,13 +146,13 @@ public class UserFragment extends Fragment {
                 break;
             }
         }
+
         if (user_exists == 0) {
             Log.d("checkUserExistsInCycle", "checkUserExistsInCycle: no");
             session_user_customer_details_list.add(fetched_user);
             sessionUserListAdapter.notifyDataSetChanged();
-        }
-        else{
-            Log.d("checkUserExistsInCycle", "checkUserExistsInCycle: yes");
+        } else {
+            Log.d("checkUserExistsInCycle:", "no");
         }
 
     }

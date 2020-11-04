@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,26 +27,25 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
-public class UserDetailsDialogFragment extends DialogFragment{
+public class UserDetailsDialogFragment extends DialogFragment {
 
-    TextInputEditText name,phone,city,address;
+    TextInputEditText name, phone, city, address;
     DialogToRecycler dialogToRecycler;
-
+    
     String recycler_name = "", recycler_phone = "";
 
     Integer adapterPosition = null;
-    String string_for_editext_city,string_for_edittext_address;
-
+    String string_for_editText_city, string_for_editText_address;
 
     public UserDetailsDialogFragment() {
     }
 
-    public UserDetailsDialogFragment(String recycler_name, String recycler_phone,String city, String address,Integer adapterPosition) {
+    public UserDetailsDialogFragment(String recycler_name, String recycler_phone, String city, String address, Integer adapterPosition) {
         this.recycler_name = recycler_name;
         this.recycler_phone = recycler_phone;
         this.adapterPosition = adapterPosition;
-        this.string_for_editext_city = city;
-        this.string_for_edittext_address = address;
+        this.string_for_editText_city = city;
+        this.string_for_editText_address = address;
     }
 
     @NonNull
@@ -62,11 +62,11 @@ public class UserDetailsDialogFragment extends DialogFragment{
         city = view.findViewById(R.id.editText_city);
         address = view.findViewById(R.id.editText_address);
 
-        if(!(recycler_name.isEmpty() && recycler_phone.isEmpty())){
+        if (!(recycler_name.isEmpty() && recycler_phone.isEmpty())) {
             name.setText(recycler_name);
             phone.setText(recycler_phone);
-            city.setText(string_for_editext_city);
-            address.setText(string_for_edittext_address);
+            city.setText(string_for_editText_city);
+            address.setText(string_for_editText_address);
         }
 
         builder.setView(view)
@@ -77,16 +77,17 @@ public class UserDetailsDialogFragment extends DialogFragment{
                         String var_city = city.getText().toString();
                         String var_address = address.getText().toString();
 
-                        UserDetails userDetails = new UserDetails(var_name,var_phone,var_city,var_address);
+                        UserDetails userDetails = new UserDetails(var_name, var_phone, var_city, var_address);
 
-                        if(!(recycler_name.isEmpty() && recycler_phone.isEmpty())){
+                        if (!(recycler_name.isEmpty() && recycler_phone.isEmpty())) {
                             updateUserToFireStore(userDetails);
-                            dialogToRecycler.passEditData(userDetails,adapterPosition);
+                            dialogToRecycler.passEditData(userDetails, adapterPosition);
 
 
-                        }
-                        else {
+                        } else {
                             addUserToFirestore(userDetails);
+
+
                             dialogToRecycler.passData(userDetails);
                         }
 
@@ -101,6 +102,16 @@ public class UserDetailsDialogFragment extends DialogFragment{
         return builder.create();
     }
 
+    private void sendOtpToUser(String phone, String message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phone, null, message, null, null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateUserToFireStore(final UserDetails userDetails) {
 
         FirebaseFirestore.getInstance().collection("Users")
@@ -108,7 +119,7 @@ public class UserDetailsDialogFragment extends DialogFragment{
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                   updateDoc(document,userDetails);
+                    updateDoc(document, userDetails);
                 }
             }
 
@@ -120,11 +131,13 @@ public class UserDetailsDialogFragment extends DialogFragment{
         FirebaseFirestore.getInstance().collection("Users").document(document_id).set(userDetails);
     }
 
-    void addUserToFirestore(UserDetails userDetails){
+    void addUserToFirestore(UserDetails userDetails) {
         FirebaseFirestore.getInstance().collection("Users").add(userDetails).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d("ADD STATUS", "Data added");
+                sendOtpToUser(phone.getText().toString(), "Your user Id is:");
+                sendOtpToUser(phone.getText().toString(), documentReference.getId());
             }
         });
 
@@ -137,12 +150,10 @@ public class UserDetailsDialogFragment extends DialogFragment{
 
     }
 
-    public interface DialogToRecycler{
+    public interface DialogToRecycler {
         void passData(UserDetails userDetails);
 
         void passEditData(UserDetails userDetails, Integer adapterPosition);
-
-
     }
 
 }

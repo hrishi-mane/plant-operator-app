@@ -44,6 +44,4 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:6.3.0'
 
 
-
-
 }

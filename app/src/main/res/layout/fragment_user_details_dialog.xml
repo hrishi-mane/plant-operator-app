@@ -28,7 +28,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:hint="Name"
@@ -52,7 +52,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_number"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:hint="Phone"
@@ -74,7 +75,7 @@
                     android:id="@+id/editText_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="8"
+                    android:ems="5"
                     android:inputType="number"
                     android:maxLines="1"
                     android:textColor="@android:color/black"
@@ -86,9 +87,8 @@
                 android:id="@+id/textInput_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:visibility="gone"
                 android:layout_marginLeft="10dp"
-
                 android:hint="City"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp">
@@ -97,7 +97,7 @@
                     android:id="@+id/editText_city"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:ems="8"
+                    android:ems="5"
                     android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@android:color/black"

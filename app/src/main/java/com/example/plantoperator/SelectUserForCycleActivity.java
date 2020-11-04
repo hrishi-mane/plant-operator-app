@@ -41,8 +41,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectUserForCycleActivity extends AppCompatActivity implements
-        AvailableUserListAdapter.AvailableUserListAdapterToSelectUser, AvailableDestinationAdapter.AvailableDestinationAdpToSelectUser {
+public class SelectUserForCycleActivity extends AppCompatActivity
+        implements AvailableUserListAdapter.AvailableUserListAdapterToSelectUser,
+        AvailableDestinationAdapter.AvailableDestinationAdpToSelectUser {
+
     Toolbar select_user_sesssion_toolbar;
 
     ViewPager user_and_location;
@@ -97,7 +99,7 @@ public class SelectUserForCycleActivity extends AppCompatActivity implements
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportActionBar().setTitle("Select Destination");
+                getSupportActionBar().setTitle("Select Location");
                 mState = true;
                 invalidateOptionsMenu();
 
@@ -205,23 +207,18 @@ public class SelectUserForCycleActivity extends AppCompatActivity implements
 
                     SessionUserCustomerDetails sessionUserCustomerDetails = new SessionUserCustomerDetails(userDetails, customerDetails);
                     session_user_customer_details_list.add(sessionUserCustomerDetails);
-                    insertSessionCustomerUsers(sessionUserCustomerDetails,documentSnapshot.getId());
+                    insertSessionCustomerUsers(sessionUserCustomerDetails, documentSnapshot.getId());
                 }
             });
         }
-
-
-
-
-
     }
 
-    private void insertSessionCustomerUsers(SessionUserCustomerDetails sessionUserCustomerDetails,String session_user_id) {
+    private void insertSessionCustomerUsers(SessionUserCustomerDetails sessionUserCustomerDetails, String session_user_id) {
         FirebaseFirestore.getInstance().collection("Session").document("session123")
                 .collection("Users").document(session_user_id).set(sessionUserCustomerDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d("Session Status", "onSuccess: Session Created" );
+                Log.d("Session Status", "onSuccess: Session Created");
             }
         });
     }

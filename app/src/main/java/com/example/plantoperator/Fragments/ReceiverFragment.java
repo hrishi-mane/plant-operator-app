@@ -192,10 +192,10 @@ public class ReceiverFragment extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onEvent(@androidx.annotation.Nullable QuerySnapshot value,
                                         @androidx.annotation.Nullable FirebaseFirestoreException e) {
-                        if (value.getDocuments().size() != 0) {
+                        if (value.size() != 0) {
 
                             if (e != null) {
-                                Log.w("Firestore Connection", "Listen failed.", e);
+                                Log.d("Firestore Connection", "Listen failed.", e);
                                 return;
                             }
 

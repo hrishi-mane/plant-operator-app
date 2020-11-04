@@ -31,7 +31,6 @@ public class HomeActivity extends AppCompatActivity{
     Fragment mUserFragment,mMapFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class HomeActivity extends AppCompatActivity{
 
         ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         mViewPagerAdapter.addFragment(mMapFragment, "MAP");
-        mViewPagerAdapter.addFragment(mUserFragment, "Truck Operators");
+        mViewPagerAdapter.addFragment(mUserFragment, "IN-SESSION");
         mViewPager.setAdapter(mViewPagerAdapter);
     }
 
