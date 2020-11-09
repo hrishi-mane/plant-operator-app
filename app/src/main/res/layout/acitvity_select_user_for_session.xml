@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containers"
+    android:layout_width="match_parent"
+    android:transitionName="shared_element_trans"
+    android:layout_height="match_parent"
+    tools:context=".SelectUserForCycleActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/select_user_session_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/session_tool_bar"
+        style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="center"
+        app:menu="@menu/select_user_for_session_toolbar_menu"
+        app:navigationIcon="@drawable/ic_baseline_close_24" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/user_location_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_user_session_appbar"
+        app:layout_constraintVertical_bias="1.0">
+
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_location_viewpager">
+
+        <TextView
+            android:id="@+id/prev_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREV"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/prev_button"
+            app:layout_constraintStart_toEndOf="@+id/prev_button"
+            app:layout_constraintTop_toTopOf="@+id/prev_button"
+            />
+
+        <TextView
+            android:id="@+id/next_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NEXT"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/next_button"
+            app:layout_constraintEnd_toStartOf="@+id/next_button"
+            app:layout_constraintTop_toTopOf="@+id/next_button" />
+
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+
+        <ImageButton
+            android:id="@+id/prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_baseline_arrow_back_ios_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/next_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/next_button" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

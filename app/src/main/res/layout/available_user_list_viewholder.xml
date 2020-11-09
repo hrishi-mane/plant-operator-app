@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <TextView
+            android:id="@+id/available_list_name_element"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="ABCDEF"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="86dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"/>
+
+        <CheckBox
+            android:id="@+id/select_user_checkbox"
+            android:layout_width="37dp"
+            android:layout_height="34dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="40dp"
+             />
+
+
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
+
+
+

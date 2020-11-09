@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dialogs.UserDetailsDialogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:paddingTop="16dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_person_24px" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:hint="Name"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                android:layout_marginStart="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="16"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    app:errorEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_call_24px" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:hint="Phone"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                android:layout_marginStart="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    app:errorEnabled="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:hint="City"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="5"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    app:errorEnabled="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_location_on_24px" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:hint="Address"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                android:layout_marginStart="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="18"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1"
+                    android:textColor="@android:color/black"
+                    app:errorEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+

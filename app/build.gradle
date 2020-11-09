@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.plantoperator"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,15 +26,25 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
+    api 'com.google.android.material:material:1.3.0-alpha02'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:6.3.0'
+
+    //direction api
+    implementation 'com.google.maps:google-maps-services:0.2.9'
+
 
 }
