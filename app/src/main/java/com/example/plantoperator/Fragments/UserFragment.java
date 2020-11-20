@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class UserFragment extends Fragment {
     SessionUserListAdapter sessionUserListAdapter;
     FloatingActionButton add_user_to_session;
     ArrayList<SessionUserCustomerDetails> session_user_customer_details_list = new ArrayList<>();
+    TextView empty_user_textview;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -75,6 +77,7 @@ public class UserFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_user, container, false);
 
         session_user_list = v.findViewById(R.id.session_user_recyclerview);
+        empty_user_textview = v.findViewById(R.id.empty_user_textView);
         session_user_list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         sessionUserListAdapter = new SessionUserListAdapter(session_user_customer_details_list);
@@ -109,9 +112,11 @@ public class UserFragment extends Fragment {
                     Log.d("onEvent ", "Listen Failed: " + error);
                 }
                 if (value.size() == 0) {
+                    empty_user_textview.setVisibility(View.VISIBLE);
                     cycleNotExists();
 
                 } else {
+                    empty_user_textview.setVisibility(View.INVISIBLE);
                     for (DocumentSnapshot documentSnapshot : value) {
                         addUserToCycle(documentSnapshot);
                     }
