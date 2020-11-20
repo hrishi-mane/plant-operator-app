@@ -6,7 +6,4 @@
         android:id="@+id/admin_page_option"
         android:title="Manage Users"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/delete_cycle"
-        android:title="Delete cycle"/>
 </menu>

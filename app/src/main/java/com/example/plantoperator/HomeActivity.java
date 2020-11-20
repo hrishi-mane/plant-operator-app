@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.plantoperator.Dialogs.DeleteCycleConfirmationFragment;
 import com.example.plantoperator.Fragments.ReceiverFragment;
 import com.example.plantoperator.Fragments.UserFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -101,15 +100,7 @@ public class HomeActivity extends AppCompatActivity{
             Intent intent = new Intent(HomeActivity.this, AdminActivity.class);
             startActivity(intent);
         }
-
-        if(item.getItemId() == R.id.delete_cycle){
-            showConfirmationDialog();
-        }
         return true;
     }
 
-    private void showConfirmationDialog() {
-        DeleteCycleConfirmationFragment deleteCycleConfirmationFragment = new DeleteCycleConfirmationFragment();
-        deleteCycleConfirmationFragment.show(getSupportFragmentManager(), "AlertDialog");
-    }
 }
