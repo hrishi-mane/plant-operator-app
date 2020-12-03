@@ -67,8 +67,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             for (UserDetails userDetails : selectedItems) {
-                arrayListUserDetails.remove(userDetails);
-                arrayListUserDetailsAll.remove(userDetails);
 
                 FirebaseFirestore.getInstance().collection("Users").whereEqualTo("name", userDetails.getName())
                         .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -84,6 +82,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
             }
 
             mode.finish();
+
             return true;
         }
 

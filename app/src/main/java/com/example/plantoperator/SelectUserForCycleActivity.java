@@ -74,6 +74,7 @@ public class SelectUserForCycleActivity extends AppCompatActivity
 
         select_user_sesssion_toolbar = findViewById(R.id.session_tool_bar);
         user_and_location = findViewById(R.id.user_location_viewpager);
+
         selectUser = new SelectUsers();
         selectDestination = new SelectDestination();
 
@@ -83,7 +84,7 @@ public class SelectUserForCycleActivity extends AppCompatActivity
         user_and_location.setAdapter(user_and_location_adapter);
 
         setSupportActionBar(select_user_sesssion_toolbar);
-        getSupportActionBar().setTitle("Select Users");
+        getSupportActionBar().setTitle("Select Drivers");
 
         select_user_sesssion_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +100,7 @@ public class SelectUserForCycleActivity extends AppCompatActivity
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportActionBar().setTitle("Select Location");
+                getSupportActionBar().setTitle("Assign Customer");
                 mState = true;
                 invalidateOptionsMenu();
 
@@ -115,7 +116,7 @@ public class SelectUserForCycleActivity extends AppCompatActivity
         prev_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportActionBar().setTitle("Select Users");
+                getSupportActionBar().setTitle("Select Drivers");
                 mState = false;
                 invalidateOptionsMenu();
 

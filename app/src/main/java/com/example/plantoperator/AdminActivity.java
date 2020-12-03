@@ -4,13 +4,16 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
@@ -23,25 +26,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.plantoperator.Adapters.UserListAdapter;
 import com.example.plantoperator.Dialogs.UserDetailsDialogFragment;
 import com.example.plantoperator.POJO.UserDetails;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AdminActivity extends AppCompatActivity implements UserDetailsDialogFragment.DialogToRecycler, Callback{
+public class AdminActivity extends AppCompatActivity implements UserDetailsDialogFragment.DialogToRecycler, Callback {
     FloatingActionButton add_users;
     Toolbar mToolBar;
     RecyclerView users;
 
-    List<UserDetails> arrayList = new ArrayList<>();
+    List<UserDetails> arrayList = new ArrayList<>();;
 
     UserListAdapter userListAdapter;
+
+    LinearLayout empty_list_container;
+
+    boolean update_user = false;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -58,10 +65,10 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(!(ContextCompat
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!(ContextCompat
                     .checkSelfPermission(this, Manifest.permission.SEND_SMS)
-                    == PackageManager.PERMISSION_GRANTED)){
+                    == PackageManager.PERMISSION_GRANTED)) {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.SEND_SMS},
                         4);
@@ -69,30 +76,15 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
             }
         }
 
+        empty_list_container = findViewById(R.id.empty_list_container);
         mToolBar = findViewById(R.id.toolBar_admin);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("Manage Users");
+        getSupportActionBar().setTitle("Manage Drivers");
 
 
         users = findViewById(R.id.user_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         users.setLayoutManager(linearLayoutManager);
-
-
-        FirebaseFirestore.getInstance().collection("Users").orderBy("name", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                    UserDetails userDetails = documentSnapshot.toObject(UserDetails.class);
-                    arrayList.add(userDetails);
-
-                }
-
-                userListAdapter = new UserListAdapter(arrayList);
-                users.setAdapter(userListAdapter);
-            }
-        });
-
 
         add_users = findViewById(R.id.add_users_button);
         add_users.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +102,42 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
             }
         });
 
+        checkIfFirestoreUpdated();
+    }
+
+    private void checkIfFirestoreUpdated() {
+
+        FirebaseFirestore.getInstance().collection("Users").
+                addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        if (error != null) {
+                            Log.d("onEvent", "AdminListener: Failed " + error);
+                        }
+                        else if (value.size() == 0) {
+                            empty_list_container.setVisibility(View.VISIBLE);
+                            arrayList.clear();
+                        }
+                        else if (!update_user) {
+                            arrayList = new ArrayList<>();
+
+                            empty_list_container.setVisibility(View.INVISIBLE);
+                            for (DocumentSnapshot documentSnapshot : value) {
+                                UserDetails userDetails = documentSnapshot.toObject(UserDetails.class);
+                                arrayList.add(userDetails);
+
+                            }
+                            Log.d("LiveListener:", "Array size: " + arrayList.size());
+                        }
+                        else{
+                            update_user = false;
+                        }
+
+                        userListAdapter = new UserListAdapter(arrayList);
+                        users.setAdapter(userListAdapter);
+                    }
+                });
     }
 
 
@@ -143,16 +171,10 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
     }
 
 
-    @Override
-    public void passData(UserDetails userDetails) {
-
-        arrayList.add(userDetails);
-        userListAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
     public void passEditData(UserDetails userDetails, Integer adapterPosition) {
+        update_user = true;
         arrayList.set(adapterPosition, userDetails);
         userListAdapter.notifyItemChanged(adapterPosition);
     }
@@ -176,7 +198,6 @@ public class AdminActivity extends AppCompatActivity implements UserDetailsDialo
         }
         return false;
     }
-
 
 
     @Override

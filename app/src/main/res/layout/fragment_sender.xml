@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:padding="24dp"
-            android:text="Truck Operators"
+            android:text="Drivers"
             android:textColor="@android:color/white" />
 
         <ImageView

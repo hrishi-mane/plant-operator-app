@@ -1,30 +1,29 @@
-package com.example.plantoperator.Dialogs;
+ package com.example.plantoperator.Dialogs;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.telephony.SmsManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
+ import android.app.Dialog;
+ import android.content.Context;
+ import android.content.DialogInterface;
+ import android.os.Bundle;
+ import android.telephony.SmsManager;
+ import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AlertDialog;
+ import androidx.fragment.app.DialogFragment;
 
-import com.example.plantoperator.POJO.UserDetails;
-import com.example.plantoperator.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+ import com.example.plantoperator.POJO.UserDetails;
+ import com.example.plantoperator.R;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.android.gms.tasks.Task;
+ import com.google.android.material.textfield.TextInputEditText;
+ import com.google.firebase.firestore.DocumentReference;
+ import com.google.firebase.firestore.FirebaseFirestore;
+ import com.google.firebase.firestore.QueryDocumentSnapshot;
+ import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class UserDetailsDialogFragment extends DialogFragment {
@@ -86,9 +85,6 @@ public class UserDetailsDialogFragment extends DialogFragment {
 
                         } else {
                             addUserToFirestore(userDetails);
-
-
-                            dialogToRecycler.passData(userDetails);
                         }
 
 
@@ -119,16 +115,12 @@ public class UserDetailsDialogFragment extends DialogFragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    updateDoc(document, userDetails);
+                    String document_id = document.getId();
+                    FirebaseFirestore.getInstance().collection("Users").document(document_id).set(userDetails);
                 }
             }
 
         });
-    }
-
-    private void updateDoc(DocumentSnapshot document, UserDetails userDetails) {
-        String document_id = document.getId();
-        FirebaseFirestore.getInstance().collection("Users").document(document_id).set(userDetails);
     }
 
     void addUserToFirestore(UserDetails userDetails) {
@@ -151,7 +143,6 @@ public class UserDetailsDialogFragment extends DialogFragment {
     }
 
     public interface DialogToRecycler {
-        void passData(UserDetails userDetails);
 
         void passEditData(UserDetails userDetails, Integer adapterPosition);
     }

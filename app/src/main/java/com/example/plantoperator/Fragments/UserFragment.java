@@ -1,6 +1,7 @@
 package com.example.plantoperator.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import com.example.plantoperator.Adapters.SessionUserListAdapter;
 import com.example.plantoperator.POJO.SessionUserCustomerDetails;
 import com.example.plantoperator.R;
 import com.example.plantoperator.SelectUserForCycleActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -74,7 +78,7 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_user, container, false);
+        View v = inflater.inflate(R.layout.fragment_in_session, container, false);
 
         session_user_list = v.findViewById(R.id.session_user_recyclerview);
         empty_user_textview = v.findViewById(R.id.empty_user_textView);
@@ -95,10 +99,23 @@ public class UserFragment extends Fragment {
 
         add_user_to_session.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectUserForCycleActivity.class);
-                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), (View) add_user_to_session, "shared_element_trans");
-                startActivity(intent, option.toBundle());
+            public void onClick(final View view) {
+
+                FirebaseFirestore.getInstance().collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.getResult().size() == 0){
+                            Snackbar.make(view, "Please add Drivers to Plant!", Snackbar.LENGTH_SHORT).
+                                    setBackgroundTint(Color.LTGRAY).setTextColor(Color.RED).setDuration(2500).show();
+                        }
+                        else{
+                            Intent intent = new Intent(getActivity(), SelectUserForCycleActivity.class);
+                            ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), (View) add_user_to_session, "shared_element_trans");
+                            startActivity(intent, option.toBundle());
+                        }
+                    }
+                });
+
             }
         });
     }
@@ -109,7 +126,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, FirebaseFirestoreException error) {
                 if (error != null) {
-                    Log.d("onEvent ", "Listen Failed: " + error);
+                    Log.d("onEvent ", "SessionListener: Failed " + error);
                 }
                 if (value.size() == 0) {
                     empty_user_textview.setVisibility(View.VISIBLE);
