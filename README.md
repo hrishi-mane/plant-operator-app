@@ -4,3 +4,8 @@
 - The Plant Operator is client facing app which will be used by the plant incharge to locate the concrete trucks on the map and see their estimated arrival time considering
   real time traffic data
 - The application will also allow remote driver authentication via the otp.
+
+
+## Resources Used
+- Google maps Platform (For real time traffic data and estimated arrival time)
+- Google Material Design Methodology to build the application UI
