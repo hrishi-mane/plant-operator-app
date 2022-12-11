@@ -1,4 +1,4 @@
- package com.example.plantoperator.Dialogs;
+ package com.example.plantoperator.dialogs;
 
  import android.app.Dialog;
  import android.content.Context;
@@ -14,7 +14,7 @@
  import androidx.appcompat.app.AlertDialog;
  import androidx.fragment.app.DialogFragment;
 
- import com.example.plantoperator.POJO.UserDetails;
+ import com.example.plantoperator.model.UserDetails;
  import com.example.plantoperator.R;
  import com.google.android.gms.tasks.OnCompleteListener;
  import com.google.android.gms.tasks.OnSuccessListener;

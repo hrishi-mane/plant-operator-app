@@ -1,4 +1,4 @@
-package com.example.plantoperator.Adapters;
+package com.example.plantoperator.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,8 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.Dialogs.UserDetailsDialogFragment;
-import com.example.plantoperator.POJO.UserDetails;
+import com.example.plantoperator.dialogs.UserDetailsDialogFragment;
+import com.example.plantoperator.model.UserDetails;
 import com.example.plantoperator.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;

@@ -1,4 +1,4 @@
-package com.example.plantoperator.Fragments;
+package com.example.plantoperator.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.Adapters.SessionUserListAdapter;
-import com.example.plantoperator.POJO.SessionUserCustomerDetails;
+import com.example.plantoperator.adapters.SessionUserListAdapter;
+import com.example.plantoperator.model.SessionUserCustomerDetails;
 import com.example.plantoperator.R;
 import com.example.plantoperator.SelectUserForCycleActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

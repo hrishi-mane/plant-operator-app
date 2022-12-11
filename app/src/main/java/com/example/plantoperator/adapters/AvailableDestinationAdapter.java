@@ -1,4 +1,4 @@
-package com.example.plantoperator.Adapters;
+package com.example.plantoperator.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

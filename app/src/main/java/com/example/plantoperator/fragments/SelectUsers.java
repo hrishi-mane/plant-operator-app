@@ -1,4 +1,4 @@
-package com.example.plantoperator.Fragments;
+package com.example.plantoperator.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.Adapters.AvailableUserListAdapter;
-import com.example.plantoperator.POJO.UserDetails;
+import com.example.plantoperator.adapters.AvailableUserListAdapter;
+import com.example.plantoperator.model.UserDetails;
 import com.example.plantoperator.R;
 import com.example.plantoperator.SelectUserForCycleActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

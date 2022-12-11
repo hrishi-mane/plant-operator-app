@@ -14,8 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.plantoperator.Fragments.ReceiverFragment;
-import com.example.plantoperator.Fragments.UserFragment;
+import com.example.plantoperator.fragments.ReceiverFragment;
+import com.example.plantoperator.fragments.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.plantoperator.Adapters;
+package com.example.plantoperator.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.POJO.UserDetails;
+import com.example.plantoperator.model.UserDetails;
 import com.example.plantoperator.R;
 import com.example.plantoperator.SelectUserForCycleActivity;
 

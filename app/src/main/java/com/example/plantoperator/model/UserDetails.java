@@ -1,4 +1,4 @@
-package com.example.plantoperator.POJO;
+package com.example.plantoperator.model;
 
 public class UserDetails {
     public String name;

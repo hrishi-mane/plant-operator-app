@@ -23,9 +23,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.Adapters.UserListAdapter;
-import com.example.plantoperator.Dialogs.UserDetailsDialogFragment;
-import com.example.plantoperator.POJO.UserDetails;
+import com.example.plantoperator.adapters.UserListAdapter;
+import com.example.plantoperator.dialogs.UserDetailsDialogFragment;
+import com.example.plantoperator.model.UserDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;

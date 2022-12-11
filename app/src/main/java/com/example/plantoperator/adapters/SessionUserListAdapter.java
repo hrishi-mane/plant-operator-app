@@ -1,4 +1,4 @@
-package com.example.plantoperator.Adapters;
+package com.example.plantoperator.adapters;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.plantoperator.POJO.SessionUserCustomerDetails;
+import com.example.plantoperator.model.SessionUserCustomerDetails;
 import com.example.plantoperator.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
